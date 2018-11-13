@@ -29,137 +29,147 @@
 
 <script>
 export default {
-  data(){
-      return{
-        type:'password',
-        switch1: false,
-        imgSrc:''
-      }
+  data() {
+    return {
+      type: "password",
+      switch1: false,
+      imgSrc: ""
+    };
   },
-  created(){
-      this.$ajax.ajax({
-          type: 'POST',
-          url:'https://elm.cangdu.org/v1/captchas'
-      }).then( data => {
-            this.imgSrc = data.code
+  created() {
+    this.$ajax
+      .ajax({
+        type: "POST",
+        url: "https://elm.cangdu.org/v1/captchas"
       })
+      .then(data => {
+        this.imgSrc = data.code;
+      });
   },
-  methods:{
-    change (status) {
-        // console.log(status);
-        if(status){
-            this.type = 'text'
-        }else{
-            this.type = 'password'
-        }
-    //   this.$Message.info('开关状态：' + status);
+  methods: {
+    change(status) {
+      // console.log(status);
+      if (status) {
+        this.type = "text";
+      } else {
+        this.type = "password";
+      }
+      //   this.$Message.info('开关状态：' + status);
     },
-    upMsg(){
-        let user = this.$refs.user.value;
-        let pass = this.$refs.pass.value;
-        if(!user||!pass){
-            this.$Message.info('账户或密码为空')
-        }else if(!/^[\u4e00-\u9fa5]{1,5}$/.test(user)||!/^\w{3,6}$/.test(pass)){
-            this.$Message.info('账户或密码错误')
-        }else if(/['|"]$/.test(user) || /['|"]$/.test(pass)){
-            this.$Message.info('账户或密码不符')
-        }else{
-            this.$ajax.ajax({
-                type:'POST',
-                url:'/Api/elm/jiekou',
-                data:{
-                    type:'login',
-                    user:user,
-                    pass:pass
-                },
-            }).then( (data) => {
-                console.log(JSON.parse(data));
-                data = JSON.parse(data)
-                if(data.err){
-                    this.$Message.info('登录成功哦！！！');
-                }else{
-                    this.$Message.info('出错了，再试试哦！！');
-                }
-            })
-        }
+    upMsg() {
+      let user = this.$refs.user.value;
+      let pass = this.$refs.pass.value;
+      if (!user || !pass) {
+        this.$Message.info("账户或密码为空");
+      } else if (
+        !/^[\u4e00-\u9fa5]{1,5}$/.test(user) ||
+        !/^\w{3,6}$/.test(pass)
+      ) {
+        this.$Message.info("账户或密码错误");
+      } else if (/['|"]$/.test(user) || /['|"]$/.test(pass)) {
+        this.$Message.info("账户或密码不符");
+      } else {
+        this.$ajax
+          .ajax({
+            type: "POST",
+            // http://localhost:8090/login/elm/jiekou
+            url: "/Api/elm/jiekou",
+            data: {
+              type: "login",
+              user: user,
+              pass: pass
+            }
+          })
+          .then(data => {
+            console.log(JSON.parse(data));
+            data = JSON.parse(data);
+            if (data.err) {
+              this.$Message.info("登录成功哦！！！");
+            } else {
+              this.$Message.info("出错了，再试试哦！！");
+            }
+          });
+      }
     },
-    lastYzm(){
-        this.$ajax.ajax({
-            type: 'POST',
-            url:'https://elm.cangdu.org/v1/captchas'
-        }).then( data => {
-                this.imgSrc = data.code
+    lastYzm() {
+      this.$ajax
+        .ajax({
+          type: "POST",
+          url: "https://elm.cangdu.org/v1/captchas"
         })
+        .then(data => {
+          this.imgSrc = data.code;
+        });
     }
   }
-}
+};
 </script>
 
 <style scoped>
-  .wrap{
-    background-color: #eee;
-    position: relative;
-  }
-  .title{
-    height: 50px;
-    color: white;
-    font-size: 1.4rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #3091e8;
-    margin-bottom: 10px;
-  }
-  .content{
-      width: 100%;
-  }
-  .content input{
-      width: 100%;
-      height: 50px;
-      border-bottom: 1px solid #eee;
-      color: #888;
-      padding-left: 10px;
-      font-size: 1.2rem;
-  }
-  .pass{
-      position: relative;
-  }
-  .ivu-switch, .ivu-switch-default{
-      position: absolute;
-      right: 10px;
-      top: 25%;
-  }
-  .yzm{
-      position: relative;
-  }
-  .yzm img{
-      position: absolute;
-      right: 50px;
-      top: 10px;
-  }
-  .yzm div{
-      position: absolute;
-      right: 10px;
-      top: 10px;
-  }
-  .yzm div p:nth-child(2){
-      color: red;
-  }
-  .txt{
-      color: red;
-      line-height: 30px;
-      padding: 5px 10px;
-  }
-  .login{
-      background-color: rgb(75,217,100);
-      color: white;
-  }
-  .chongzhi{
-      text-align: right;
-      padding: 10px;
-      color: #3091e8;
-      font-size: 1.1rem;
-  }
-
+.wrap {
+  background-color: #eee;
+  position: relative;
+}
+.title {
+  height: 50px;
+  color: white;
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #3091e8;
+  margin-bottom: 10px;
+}
+.content {
+  width: 100%;
+}
+.content input {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid #eee;
+  color: #888;
+  padding-left: 10px;
+  font-size: 1.2rem;
+}
+.pass {
+  position: relative;
+}
+.ivu-switch,
+.ivu-switch-default {
+  position: absolute;
+  right: 10px;
+  top: 25%;
+}
+.yzm {
+  position: relative;
+}
+.yzm img {
+  position: absolute;
+  right: 50px;
+  top: 10px;
+}
+.yzm div {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.yzm div p:nth-child(2) {
+  color: red;
+}
+.txt {
+  color: red;
+  line-height: 30px;
+  padding: 5px 10px;
+}
+.login {
+  background-color: rgb(75, 217, 100);
+  color: white;
+}
+.chongzhi {
+  text-align: right;
+  padding: 10px;
+  color: #3091e8;
+  font-size: 1.1rem;
+}
 </style>

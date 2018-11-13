@@ -3,6 +3,7 @@ const express = require('express');
 // 解析数据
 const bodyParser = require('body-parser');
 let server = express();
+
 server.listen(8090);
 let db = mysql.createPool({
   host:'localhost',

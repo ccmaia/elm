@@ -17,6 +17,14 @@ module.exports = {
         pathRewrite:{
           '^/Api':'/login'
         }
+      },
+      "/Food":{
+        // https://h5.ele.me/restapi/shopping/v3/restaurants
+        target:'https://h5.ele.me/restapi',
+        changeOrigin:true,
+        pathRewrite:{
+          '^/Food':'/'
+        }
       }
     },
 
