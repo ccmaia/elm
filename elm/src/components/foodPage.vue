@@ -17,6 +17,7 @@
     <div class="imgs">
       <img src="../../static/list.jpg" alt="">
     </div>
+    <!-- 轮播图 -->
     <div class="lbt">
       <Carousel autoplay v-model="value2" loop>
         <CarouselItem>
@@ -35,8 +36,8 @@
     </div>
     <p class="tuijian">——  推荐商家  ——</p>
     <div class="list">
-      <button-view></button-view>
-      <foodList-view></foodList-view>
+      <button-view id="searchBar"></button-view>
+      <foodList-view :number='number'></foodList-view>
     </div>
   </div>
 </template>
@@ -53,23 +54,65 @@ export default {
     return{
       city:'',
       classification:[],
-      value2:0
+      value2:0,
+      offsetTop:0,
+      str:'',
+      number:5
     }
   },
   created(){
-    let latitude = this.$route.query.geohash.split(',')[0];
-    let longitude = this.$route.query.geohash.split(',')[1];
+    this.str = this.$route.query.geohash
     this.city = this.$route.query.city;
-    
-    // 请求附近的商品limit=10  请求10条
-    this.$ajax.ajax({
-      url:'/Food/shopping/v3/restaurants?latitude='+ latitude +'&longitude='+ longitude+'&limit=10'
-    }).then( data => {
-      // console.log(data)
+    // 通过vuex获取数据
+    this.$store.dispatch('foodList',this.str)
+  },
+  // 生命周期   挂载
+  mounted(){
+    var _this = this;
+    // 注册并监听scroll事件
+    this.offsetTop = document.querySelector('#searchBar').offsetTop;
+    window.addEventListener('scroll',() => {
+      // 调用滑动固定元素方法
+      // console.log(this.$route)
+      if(!this.$route.name || this.$route.name !== 'footPage'){
+        return
+      }
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop   
+      this.handleScroll(this.offsetTop,scrollTop);
+      // 下滑加载更多
+      // console.log(window.screen.height , scrollTop , document.body.clientHeight)
+      if(window.screen.height + scrollTop >= document.body.clientHeight-100){
+        // this.$store.dispatch('foodList',this.str)
+        _this.number += 5;
+      }
     })
   },
   methods:{
+    handleScroll (domTop,scrollTop) {
+      
+      // var top = document.querySelector('.search').offsetHeight;
+      // console.log(domTop,scrollTop)
+      if(scrollTop>=55){
+        document.querySelector('.search').style.position = 'fixed';
+        document.querySelector('.search').style.top = 0;
+        document.querySelector('.search').style.left = 0;
+        // console.log(scrollTop,domTop)
+        if(scrollTop >= 500){
+          document.querySelector('#searchBar').style.position = 'fixed';
+          let top = document.querySelector('.search').offsetHeight;
+          document.querySelector('#searchBar').style.top = top+'px';
+        }else{ 
+          document.querySelector('#searchBar').style.position = '';
+          document.querySelector('#searchBar').style.top = '';
+        }
+      }else{
+        document.querySelector('.search').style.position = 'relative';
+        document.querySelector('.search').style.top = '';
+        document.querySelector('.search').style.left = '';
+      }
+      
 
+    },
   }
 };
 </script>
@@ -92,6 +135,9 @@ export default {
 }
 .search{
   position: relative;
+  width: 100%;
+  background-color: #3091e8;
+  z-index: 100;
 }
 .search input{
   width: 95%;
@@ -111,7 +157,7 @@ a {
 .icon-search{
   color: #888;
   position: absolute;
-  top: 3px;
+  top: 5px;
   left: 10px;
 }
 .ivu-tabs-ink-bar,.ivu-tabs-ink-bar-animated{

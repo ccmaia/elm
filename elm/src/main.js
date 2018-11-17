@@ -6,6 +6,8 @@ import router from './router'
 import Jq from 'jquery'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
+import store from './store'
+
 Vue.use(iView)
 Vue.config.productionTip = false
 Vue.prototype.$ajax = Jq
@@ -14,6 +16,7 @@ Vue.prototype.$ajax = Jq
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<router-view/>'
 })

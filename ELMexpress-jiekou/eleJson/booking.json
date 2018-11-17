@@ -1,0 +1,79 @@
+{
+    "alert_msg": "",
+    "broadcast": [],
+    "business_type": 0,
+    "cart": {
+        "agent_fee_tip": "另需配送费5元",
+        "deliver_amount": 0,
+        "discount_amount": 0,
+        "extra": [],
+        "group": [],
+        "ingredient_group": [],
+        "is_address_too_far": 0,
+        "max_weight": 10000000,
+        "minimum_order_amount": 0,
+        "original_total": 0,
+        "package_group": [],
+        "restaurant": {
+            "address": "河南省郑州市航海路和大学路交叉口二七万达广场一、二层",
+            "closing_remain_seconds": 0,
+            "id": 1552152,
+            "image_path": "a8f0cdefab4556d926f2f05d3b924f9epng",
+            "is_closed": 0,
+            "is_fengniao": 0,
+            "latitude": 34.716914,
+            "longitude": 113.643221,
+            "name": "必胜客宅急送(二七万达店)",
+            "next_business_time": "",
+            "only_use_poi": 0,
+            "phone": "4009208809",
+            "piecewise_agent_fee": {
+                "rules": [
+                    {
+                        "fee": 5,
+                        "price": 0
+                    }
+                ]
+            },
+            "scheme": "eleme://catering?restaurant_id=1552152",
+            "status": 1,
+            "take_by_self": 0,
+            "type": 0
+        },
+        "total": 0,
+        "total_weight": 0,
+        "tying_sku_group": []
+    },
+    "checkout_button": {
+        "action": "checkout",
+        "text": "去结算"
+    },
+    "checkout_button_v2": {
+        "action": "forbidden",
+        "forbidden_reason": {
+            "content": "¥0起送",
+            "scheme": "eleme://catering?restaurant_id=1552152",
+            "types": [
+                3
+            ]
+        },
+        "text": ""
+    },
+    "invalid_foods": [],
+    "is_pindan_available": true,
+    "item_promotion_cell": [],
+    "shop_promotion_cell": [
+        {
+            "add_on_pop_up_tip": "满50减12元，满89减20元",
+            "content": [
+                {
+                    "color": "333333",
+                    "text": "满50减12元，满89减20元"
+                }
+            ],
+            "relate_activity_id": 0,
+            "relate_sku_ids": []
+        }
+    ],
+    "toasts": []
+}

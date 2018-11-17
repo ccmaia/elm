@@ -18,14 +18,13 @@ module.exports = {
           '^/Api':'/login'
         }
       },
-      "/Food":{
-        // https://h5.ele.me/restapi/shopping/v3/restaurants
-        target:'https://h5.ele.me/restapi',
+      "/Shopping":{
+        target:'http://localhost:8890',
         changeOrigin:true,
         pathRewrite:{
-          '^/Food':'/'
+          '^/Shopping':'/'
         }
-      }
+      },
     },
 
     // Various Dev Server settings

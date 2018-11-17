@@ -5,7 +5,7 @@ import Login from '@/components/login'
 import Reset from '@/components/reset'
 import City from '@/components/city'
 import FoodPage from '@/components/foodPage'
-
+import ShopCar from '@/components/shopCar'
 Vue.use(Router)
 
 export default new Router({
@@ -31,6 +31,11 @@ export default new Router({
       path:'/foodPage/',
       name:'footPage',
       component:FoodPage
+    },
+    {
+      path:'/shopCar',
+      name:'shopCar',
+      component:ShopCar
     }
   ]
 })
